@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 st.write("""
-# Heart Disease CVD Model Prediction
+# Heart CVD Model Prediction
 """)
 
 # --- Definisi fungsi user_input_features() ---
