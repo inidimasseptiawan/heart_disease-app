@@ -18,18 +18,18 @@ st.write("""
 # --- Definisi fungsi user_input_features() ---
 def user_input_features():
     st.sidebar.header('Manual Input')
-    cp = st.sidebar.slider('Chest pain type', 1, 4, 2) 
+    cp = st.sidebar.slider('Chest Pain Type', 1, 4, 2) 
     
     wcp_text = ""
     if cp == 1:
-        wcp_text = "Nyeri dada tipe angina (Tipikal Angina)"
+        wcp_text = "Chest pain type angina (Tipikal Angina)"
     elif cp == 2:
-        wcp_text = "Nyeri dada tipe nyeri tidak stabil (Atypical Angina)"
+        wcp_text = "Chest pain type unstable (Atypical Angina)"
     elif cp == 3:
-        wcp_text = "Nyeri dada tipe nyeri tidak stabil yang parah (Non-Anginal Pain)"
+        wcp_text = "Chest pain type unstable and severe (Non-Anginal Pain)"
     elif cp == 4:
-        wcp_text = "Nyeri dada yang tidak terkait dengan masalah jantung (Asymptomatic)"
-    st.sidebar.write("Jenis nyeri dada yang dirasakan oleh pasien:", wcp_text)
+        wcp_text = "Chest pain type non heart disease (Asymptomatic)"
+    st.sidebar.write("The type of chest pain felt by the patient:", wcp_text)
     
     thalach = st.sidebar.slider("Maximum HR Achived", 71, 202, 80)
     slope = st.sidebar.slider("Slope Segment ST on Elektrokardiogram (EKG)", 0, 2, 1)
