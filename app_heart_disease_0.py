@@ -1,0 +1,92 @@
+import streamlit as st
+import pandas as pd
+import pickle
+import time
+from PIL import Image
+# Tambahkan import StandardScaler jika modelmu menggunakan itu
+
+st.set_page_config(
+    page_title="CVD_MODEL_PREDICTION",
+    page_icon = "🫀",
+    layout = 'wide'
+)
+
+st.write("""
+# Heart Disease CVD Model Prediction
+""")
+
+# --- Definisi fungsi user_input_features() ---
+def user_input_features():
+    st.sidebar.header('Manual Input')
+    cp = st.sidebar.slider('Chest pain type', 1, 4, 2) 
+    
+    wcp_text = ""
+    if cp == 1:
+        wcp_text = "Nyeri dada tipe angina (Tipikal Angina)"
+    elif cp == 2:
+        wcp_text = "Nyeri dada tipe nyeri tidak stabil (Atypical Angina)"
+    elif cp == 3:
+        wcp_text = "Nyeri dada tipe nyeri tidak stabil yang parah (Non-Anginal Pain)"
+    elif cp == 4:
+        wcp_text = "Nyeri dada yang tidak terkait dengan masalah jantung (Asymptomatic)"
+    st.sidebar.write("Jenis nyeri dada yang dirasakan oleh pasien:", wcp_text)
+    
+    thalach = st.sidebar.slider("Maximum heart rate achieved", 71, 202, 80)
+    slope = st.sidebar.slider("Kemiringan segmen ST pada elektrokardiogram (EKG)", 0, 2, 1)
+    oldpeak = st.sidebar.slider("Seberapa banyak ST segmen menurun atau depresi", 0.0, 6.2, 1.0)
+    exang = st.sidebar.slider("Exercise induced angina", 0, 1, 1)
+    ca = st.sidebar.slider("Number of major vessels", 0, 3, 1)
+    thal = st.sidebar.slider("Hasil tes thalium", 1, 3, 1)
+    
+    sex_option = st.sidebar.selectbox("Jenis Kelamin", ('Perempuan', 'Pria'))
+    sex = 0 if sex_option == "Perempuan" else 1 
+    
+    age = st.sidebar.slider("Usia", 29, 77, 30)
+    
+    data = {'cp': cp,
+            'thalach': thalach,
+            'slope': slope,
+            'oldpeak': oldpeak,
+            'exang': exang,
+            'ca': ca,
+            'thal': thal,
+            'sex': sex,
+            'age': age}
+    features = pd.DataFrame(data, index=[0])
+    return features
+
+def heart():
+    st.write("""
+    This app predicts the **Heart Disease**
+    
+    Data obtained from the [Heart Disease dataset](https://archive.ics.uci.edu/dataset/45/heart+disease) by UCIML. 
+    """)
+    st.sidebar.header('User Input Features:')
+    # Collects user input features into dataframe
+    uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
+    if uploaded_file is not None:
+        input_df = pd.read_csv(uploaded_file)
+    else:
+        # Panggil fungsi user_input_features yang sudah didefinisikan di luar
+        input_df = user_input_features() # Menggunakan fungsi user_input_features yang pertama
+    
+    img = Image.open("heart-disease.jpg")
+    st.image(img, width=500)
+    if st.sidebar.button('Predict!'):
+        df = input_df
+        st.write(df)
+        with open("generate_heart_disease.pkl", 'rb') as file: 
+            loaded_model = pickle.load(file)
+        prediction = loaded_model.predict(df)        
+        
+        st.subheader('Prediction: ')
+        with st.spinner('Wait for it...'):
+            time.sleep(4)
+            if prediction == 0:
+                # Jika NO HEART DISEASE, tampilkan dengan warna hijau
+                st.markdown(f"<h2 style='color: green;'>NO HEART DISEASE</h2>", unsafe_allow_html=True)
+            else:
+                # Jika POSITIF HEART DISEASE, tampilkan dengan warna merah
+                st.markdown(f"<h2 style='color: red;'>POSITIF HEART DISEASE</h2>", unsafe_allow_html=True)
+# Panggil fungsi heart untuk menjalankan aplikasi
+heart()
