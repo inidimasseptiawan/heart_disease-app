@@ -31,17 +31,17 @@ def user_input_features():
         wcp_text = "Nyeri dada yang tidak terkait dengan masalah jantung (Asymptomatic)"
     st.sidebar.write("Jenis nyeri dada yang dirasakan oleh pasien:", wcp_text)
     
-    thalach = st.sidebar.slider("Maximum heart rate achieved", 71, 202, 80)
-    slope = st.sidebar.slider("Kemiringan segmen ST pada elektrokardiogram (EKG)", 0, 2, 1)
-    oldpeak = st.sidebar.slider("Seberapa banyak ST segmen menurun atau depresi", 0.0, 6.2, 1.0)
-    exang = st.sidebar.slider("Exercise induced angina", 0, 1, 1)
-    ca = st.sidebar.slider("Number of major vessels", 0, 3, 1)
-    thal = st.sidebar.slider("Hasil tes thalium", 1, 3, 1)
+    thalach = st.sidebar.slider("Maximum HR Achived", 71, 202, 80)
+    slope = st.sidebar.slider("Slope Segment ST on Elektrokardiogram (EKG)", 0, 2, 1)
+    oldpeak = st.sidebar.slider("Depression Segment ST when Peak Activity", 0.0, 6.2, 1.0)
+    exang = st.sidebar.slider("Exercise-Induced Angina", 0, 1, 1)
+    ca = st.sidebar.slider("Number of Major Vessels", 0, 3, 1)
+    thal = st.sidebar.slider("Thallium Stress Test", 1, 3, 1)
     
-    sex_option = st.sidebar.selectbox("Jenis Kelamin", ('Perempuan', 'Pria'))
-    sex = 0 if sex_option == "Perempuan" else 1 
+    sex_option = st.sidebar.selectbox("Sex", ('Female', 'Male'))
+    sex = 0 if sex_option == "Female" else 1 
     
-    age = st.sidebar.slider("Usia", 29, 77, 30)
+    age = st.sidebar.slider("Age", 29, 77, 30)
     
     data = {'cp': cp,
             'thalach': thalach,
