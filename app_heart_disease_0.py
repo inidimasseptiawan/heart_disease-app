@@ -18,8 +18,7 @@ st.write("""
 # --- Definisi fungsi user_input_features() ---
 def user_input_features():
     st.sidebar.header('Manual Input')
-    cp = st.sidebar.selectbox('Chest Pain (cp)', 1, 4, 2) 
-    
+    cp = st.sidebar.selectbox('Chest Pain (cp)',( 1, 2, 3,4)) 
     wcp_text = ""
     if cp == 1:
         wcp_text = "Chest pain type angina (Tipikal Angina)"
