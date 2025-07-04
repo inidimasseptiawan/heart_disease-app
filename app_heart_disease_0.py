@@ -67,6 +67,9 @@ def user_input_features():
                **4 - Asymptomatic:** No chest pain reported. \n """)
     
     # UI untuk Maximum HR (thalach) - Perhatikan bahwa inisialisasi session_state sudah dipindahkan
+    if 'show_thalach_info' not in st.session_state:
+        st.session_state.show_thalach_info = False
+    
     with st.sidebar:
         col1_thalach, col2_thalach = st.columns([0.8, 0.2])
 
