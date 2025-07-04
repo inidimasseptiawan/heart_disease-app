@@ -67,7 +67,7 @@ def user_input_features():
                **4 - Asymptomatic:** No chest pain reported. \n """)
     
      # --- UI untuk Maximum HR (thalach) ---
-    with st.sidebar:
+    with st.sidebar: # Pastikan ini berada di sidebar
         col1_thalach, col2_thalach = st.columns([0.8, 0.2])
 
         with col1_thalach:
