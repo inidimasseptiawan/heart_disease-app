@@ -32,14 +32,14 @@ try:
     # Ini sangat penting untuk memastikan urutan dan keberadaan kolom yang konsisten saat prediksi.
     # Perhatikan: sebelumnya nama file mungkin 'feature_names_for_model.pkl', tapi sudah diubah menjadi 'features.pkl' di sini.
     expected_cols = joblib.load('features.pkl') 
-    st.success("Model, Scaler, dan Daftar Fitur berhasil dimuat!")
+    st.success("Model, Scaler, dan List Features Successfully Loaded!")
 except FileNotFoundError:
     # Jika salah satu file .pkl tidak ditemukan, tampilkan pesan error dan hentikan aplikasi.
     st.error("Error: Pastikan 'generate_heart_disease.pkl', 'scaler.pkl', dan 'features.pkl' ada di direktori yang sama.")
     st.stop() # Hentikan aplikasi jika file tidak ditemukan
 except Exception as e:
     # Tangani error lain yang mungkin terjadi saat memuat file dan tampilkan pesan error.
-    st.error(f"Error saat memuat file: {e}")
+    st.error(f"Error when loading file: {e}")
     st.stop()
 
 # --- Definisi fungsi user_input_features() ---
