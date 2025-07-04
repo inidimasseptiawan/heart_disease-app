@@ -54,17 +54,17 @@ def user_input_features():
             # Menambahkan sedikit padding atas agar tombol sejajar dengan selectbox
             st.write("") # Garis kosong pertama
             st.write("") # Garis kosong kedua (mungkin perlu disesuaikan)
-            if st.button('?', key='cp_info_button'):
+            if st.button('❔', key='cp_info_button'):
                 st.session_state.show_cp_info = not st.session_state.show_cp_info # Toggle state
 
         # Menampilkan expander secara kondisional di sidebar
         if st.session_state.show_cp_info:
             with st.expander("Detail Chest Pain (CP)", expanded=True):
                 st.write("""
-                **1 - Typical Angina:** Nyeri dada yang khas, biasanya terkait dengan aktivitas fisik dan mereda dengan istirahat atau nitrogliserin.
-                **2 - Atypical Angina:** Nyeri dada yang kurang khas, mungkin tidak sepenuhnya memenuhi kriteria angina tipikal.
-                **3 - Non-Anginal Pain:** Nyeri dada yang bukan berasal dari masalah jantung, seperti nyeri otot atau pencernaan.
-                **4 - Asymptomatic:** Tidak ada nyeri dada yang dilaporkan.
+               **1 - Typical Angina:** Chest pain that is characteristic, usually associated with physical activity and relieved by rest or nitroglycerin.
+               **2 - Atypical Angina:** Chest pain that is less characteristic, perhaps not fully meeting the criteria for typical angina.
+               **3 - Non-Anginal Pain:** Chest pain that does not originate from heart problems, such as muscle pain or digestive issues.
+               **4 - Asymptomatic:** No chest pain reported.
                 """)
     
     thalach = st.sidebar.slider("Maximum HR (thalach)", 71, 202, 80)
