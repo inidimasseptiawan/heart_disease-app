@@ -132,21 +132,32 @@ def heart():
     
     img = Image.open("heart-disease.jpg")
     st.image(img, width=500)
-    if st.sidebar.button('Predict!'):
-        df = input_df
-        st.write(df)
-        with open("generate_heart_disease.pkl", 'rb') as file: 
-            loaded_model = pickle.load(file)
-        prediction = loaded_model.predict(df)        
-        
-        st.subheader('Prediction: ')
-        with st.spinner('Wait for it...'):
-            time.sleep(3)
-            if prediction == 0:
-                # Jika NO HEART DISEASE, tampilkan dengan warna hijau
-                st.markdown(f"<h2 style='color: green;'>NEGATIF HEART DISEASE</h2>", unsafe_allow_html=True)
-            else:
-                # Jika POSITIF HEART DISEASE, tampilkan dengan warna merah
-                st.markdown(f"<h2 style='color: red;'>POSITIF HEART DISEASE</h2>", unsafe_allow_html=True)
+    
+if st.sidebar.button('Predict!'):
+    df = input_df
+    st.write(df)
+    with open("generate_heart_disease.pkl", 'rb') as file: 
+        loaded_model = pickle.load(file)
+    
+    # Hitung prediksi dan probabilitas
+    prediction_proba = loaded_model.predict_proba(df)
+    score = prediction_proba[0][1]  # probabilitas kelas 1 (positif CVD)
+    prediction = loaded_model.predict(df)
+
+    st.subheader('Prediction: ')
+    with st.spinner('Wait for it...'):
+        time.sleep(3)
+        if prediction == 0:
+            # NEGATIF HEART DISEASE
+            st.markdown(
+                f"<h2 style='color: green;'>NEGATIF HEART DISEASE</h2>"
+                f"<h4 style='color: gray;'>Model Confidence (CVD): {score:.2f}</h4>",
+                unsafe_allow_html=True)
+        else:
+            # POSITIF HEART DISEASE
+            st.markdown(
+                f"<h2 style='color: red;'>POSITIF HEART DISEASE</h2>"
+                f"<h4 style='color: gray;'>Model Confidence (CVD): {score:.2f}</h4>",
+                unsafe_allow_html=True)
 # Panggil fungsi heart untuk menjalankan aplikasi
 heart()
