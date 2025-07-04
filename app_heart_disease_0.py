@@ -84,7 +84,7 @@ def heart():
             time.sleep(3)
             if prediction == 0:
                 # Jika NO HEART DISEASE, tampilkan dengan warna hijau
-                st.markdown(f"<h2 style='color: green;'>NO HEART DISEASE</h2>", unsafe_allow_html=True)
+                st.markdown(f"<h2 style='color: green;'>NEGATIF HEART DISEASE</h2>", unsafe_allow_html=True)
             else:
                 # Jika POSITIF HEART DISEASE, tampilkan dengan warna merah
                 st.markdown(f"<h2 style='color: red;'>POSITIF HEART DISEASE</h2>", unsafe_allow_html=True)
