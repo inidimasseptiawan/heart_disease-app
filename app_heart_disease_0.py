@@ -18,7 +18,7 @@ st.write("""
 # --- Definisi fungsi user_input_features() ---
 def user_input_features():
     st.sidebar.header('Manual Input')
-    cp = st.sidebar.slider('Chest Pain Type', 1, 4, 2) 
+    cp = st.sidebar.slider('Chest Pain (cp)', 1, 4, 2) 
     
     wcp_text = ""
     if cp == 1:
@@ -31,12 +31,12 @@ def user_input_features():
         wcp_text = "Chest pain type non heart disease (Asymptomatic)"
     st.sidebar.write("Felt by the patient:", wcp_text)
     
-    thalach = st.sidebar.slider("Maximum HR Achived", 71, 202, 80)
-    slope = st.sidebar.slider("Slope Segment ST on Elektrokardiogram (EKG)", 0, 2, 1)
-    oldpeak = st.sidebar.slider("Depression Segment ST when Peak Activity", 0.0, 6.2, 1.0)
-    exang = st.sidebar.slider("Exercise-Induced Angina", 0, 1, 1)
-    ca = st.sidebar.slider("Number of Major Vessels", 0, 3, 1)
-    thal = st.sidebar.slider("Thallium Stress Test", 1, 3, 1)
+    thalach = st.sidebar.slider("Maximum HR (thalach)", 71, 202, 80)
+    slope = st.sidebar.slider("Slope Segment ST on EKG (slope)", 0, 2, 1)
+    oldpeak = st.sidebar.slider("Depression Segment ST when Peak Activity (peak)", 0.0, 6.2, 1.0)
+    exang = st.sidebar.slider("Exercise-Induced Angina (exang)", 0, 1, 1)
+    ca = st.sidebar.slider("Number of Major Vessels (ca)", 0, 3, 1)
+    thal = st.sidebar.slider("Thallium Stress Test (thal)", 1, 3, 1)
     
     sex_option = st.sidebar.selectbox("Sex", ('Female', 'Male'))
     sex = 0 if sex_option == "Female" else 1 
