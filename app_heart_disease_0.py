@@ -122,53 +122,53 @@ def heart():
     Data obtained from the [Heart Disease dataset](https://archive.ics.uci.edu/dataset/45/heart+disease) by UCIML. 
     """)
     st.sidebar.header('List Data Input by Document:')
-    # Collects user input features into dataframe
+
     uploaded_file = st.sidebar.file_uploader("Upload your data here (CSV)", type=["csv"])
     if uploaded_file is not None:
         input_df = pd.read_csv(uploaded_file)
     else:
-        # Panggil fungsi user_input_features yang sudah didefinisikan di luar
-        input_df = user_input_features() # Menggunakan fungsi user_input_features yang pertama
-    
+        input_df = user_input_features()
+
     img = Image.open("heart-disease.jpg")
     st.image(img, width=500)
 
     if st.sidebar.button('Predict!'):
-            # ✅ Pastikan urutan kolom sama seperti training
-            expected_cols = ['sex', 'age', 'cp', 'thalach', 'slope', 'exang', 'ca', 'thal', 'oldpeak']
-            df = input_df[expected_cols]
-            st.write(df)
-    
-            # ✅ Load model
-            with open("generate_heart_disease.pkl", 'rb') as file: 
-                loaded_model = pickle.load(file)
-    
-            # ✅ Load scaler
-            with open("scaler.pkl", "rb") as file:
-                scaler = pickle.load(file)
-    
-            # ✅ Scaling
-            input_scaled = scaler.transform(df)
-    
-            # ✅ Predict
-            prediction_proba = loaded_model.predict_proba(input_scaled)
-            score = prediction_proba[0][1]
-            prediction = loaded_model.predict(input_scaled)
-    
-            # ✅ Tampilkan hasil
-            st.subheader('Prediction: ')
-            with st.spinner('Wait for it...'):
-                time.sleep(2)
-                if prediction == 0:
-                    st.markdown(
-                        f"<h2 style='color: green;'>NEGATIF HEART DISEASE</h2>"
-                        f"<h4 style='color: gray;'>Model Confidence (CVD): {score:.2f}</h4>",
-                        unsafe_allow_html=True)
-                else:
-                    st.markdown(
-                        f"<h2 style='color: red;'>POSITIF HEART DISEASE</h2>"
-                        f"<h4 style='color: gray;'>Model Confidence (CVD): {score:.2f}</h4>",
-                        unsafe_allow_html=True)
+        # Tambahkan fitur thalach_ratio
+        input_df['pred_hr_max'] = 220 - input_df['age']
+        input_df['thalach_ratio'] = input_df['thalach'] / input_df['pred_hr_max']
 
+        # Load model, scaler, dan urutan fitur
+        with open("generate_heart_disease.pkl", 'rb') as file: 
+            loaded_model = pickle.load(file)
+
+        with open("scaler.pkl", "rb") as file:
+            scaler = pickle.load(file)
+
+        with open("features.pkl", "rb") as file:
+            feature_order = pickle.load(file)
+
+        # Susun ulang dataframe sesuai urutan fitur saat training
+        df = input_df[feature_order]
+        st.write(df)
+
+        # Transformasi dan prediksi
+        input_scaled = scaler.transform(df)
+        prediction_proba = loaded_model.predict_proba(input_scaled)
+        score = prediction_proba[0][1]
+        prediction = loaded_model.predict(input_scaled)
+
+        st.subheader('Prediction:')
+        with st.spinner('Wait for it...'):
+            time.sleep(2)
+            if prediction == 0:
+                st.markdown(
+                    f"<h2 style='color: green;'>NEGATIF HEART DISEASE</h2>"
+                    f"<h4 style='color: gray;'>Model Confidence (CVD): {score:.2f}</h4>",
+                    unsafe_allow_html=True)
+            else:
+                st.markdown(
+                    f"<h2 style='color: red;'>POSITIF HEART DISEASE</h2>"
+                    f"<h4 style='color: gray;'>Model Confidence (CVD): {score:.2f}</h4>",
+                    unsafe_allow_html=True)
 # Panggil fungsi heart untuk menjalankan aplikasi
 heart()
