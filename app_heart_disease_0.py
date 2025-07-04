@@ -63,7 +63,7 @@ def heart():
     """)
     st.sidebar.header('User Input Features:')
     # Collects user input features into dataframe
-    uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
+    uploaded_file = st.sidebar.file_uploader("Upload your data here (CSV)", type=["csv"])
     if uploaded_file is not None:
         input_df = pd.read_csv(uploaded_file)
     else:
@@ -81,7 +81,7 @@ def heart():
         
         st.subheader('Prediction: ')
         with st.spinner('Wait for it...'):
-            time.sleep(4)
+            time.sleep(3)
             if prediction == 0:
                 # Jika NO HEART DISEASE, tampilkan dengan warna hijau
                 st.markdown(f"<h2 style='color: green;'>NO HEART DISEASE</h2>", unsafe_allow_html=True)
