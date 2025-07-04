@@ -322,7 +322,6 @@ def heart_prediction_app():
             # Jika prediksi adalah 0 (Tidak Penyakit), tampilkan teks hijau.
             st.markdown(
                 f"<h2 style='color: green;'>NEGATIVE FOR HEART DISEASE</h2>"
-                f"<h4 style='color: gray;'>Model Confidence (No Disease): {prediction_proba[0][0]:.2f}</h4>"
                 f"<h4 style='color: gray;'>Model Confidence (Disease): {score:.2f}</h4>",
                 unsafe_allow_html=True
             )
@@ -330,7 +329,6 @@ def heart_prediction_app():
             # Jika prediksi adalah 1 (Penyakit), tampilkan teks merah.
             st.markdown(
                 f"<h2 style='color: red;'>POSITIVE FOR HEART DISEASE</h2>"
-                f"<h4 style='color: gray;'>Model Confidence (No Disease): {prediction_proba[0][0]:.2f}</h4>"
                 f"<h4 style='color: gray;'>Model Confidence (Disease): {score:.2f}</h4>",
                 unsafe_allow_html=True
             )
