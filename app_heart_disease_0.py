@@ -132,7 +132,6 @@ def heart():
     
     img = Image.open("heart-disease.jpg")
     st.image(img, width=500)
-    
     if st.sidebar.button('Predict!'):
     df = input_df
     st.write(df)
