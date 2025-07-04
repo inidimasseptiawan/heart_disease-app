@@ -67,7 +67,6 @@ def user_input_features():
                **4 - Asymptomatic:** No chest pain reported. \n """)
     
      # --- UI untuk Maximum HR (thalach) ---
-    thalach = st.sidebar.slider("Maximum HR (thalach)", 71, 202, 80)
     with st.sidebar:
         col1_thalach, col2_thalach = st.columns([0.8, 0.2])
 
@@ -77,17 +76,15 @@ def user_input_features():
         with col2_thalach:
             st.write("")
             st.write("")
-            if st.button('?', key='thalach_info_button'):
+            if st.button('❔', key='thalach_info_button'):
                 st.session_state.show_thalach_info = not st.session_state.show_thalach_info
 
         if st.session_state.show_thalach_info:
             with st.expander("Detail Maximum HR (Thalach)", expanded=True):
                 st.write("""
-                **Maximum Heart Rate Achieved (Thalach):** This is the highest heart rate recorded during a stress test. A higher maximum heart rate during exercise generally indicates better cardiovascular fitness. However, in the context of heart disease prediction, the value is assessed alongside other factors. Normal maximum heart rates vary by age and individual fitness levels.
+                **Maximum Heart Rate Achieved (Thalach):** \n This is the highest heart rate recorded during a stress test. A higher maximum heart rate during exercise generally indicates better cardiovascular fitness. However, in the context of heart disease prediction, the value is assessed alongside other factors. Normal maximum heart rates vary by age and individual fitness levels.
                 """)
 
-
-    
     slope = st.sidebar.slider("Slope Segment ST on EKG (slope)", 0, 2, 1)
     oldpeak = st.sidebar.slider("Depression Segment ST when Peak Activity (peak)", 0.0, 6.2, 1.0)
     exang = st.sidebar.slider("Exercise-Induced Angina (exang)", 0, 1, 1)
