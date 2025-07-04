@@ -85,7 +85,10 @@ def user_input_features():
         if st.session_state.show_thalach_info:
             with st.expander("Detail Maximum HR (Thalach)", expanded=True):
                 st.write("""
-                **Maximum Heart Rate Achieved (Thalach):** \n This is the highest heart rate recorded during a stress test. A higher maximum heart rate during exercise generally indicates better cardiovascular fitness. However, in the context of heart disease prediction, the value is assessed alongside other factors. Normal maximum heart rates vary by age and individual fitness levels.
+                **Maximum Heart Rate Achieved (Thalach):** \n This is the highest heart rate recorded during a stress test.\n
+                A higher maximum heart rate during exercise generally indicates better cardiovascular fitness. \n
+                However, in the context of heart disease prediction, the value is assessed alongside other factors. \n 
+                Normal maximum heart rates vary by age and individual fitness levels.
                 """)
 
     slope = st.sidebar.slider("Slope Segment ST on EKG (slope)", 0, 2, 1)
