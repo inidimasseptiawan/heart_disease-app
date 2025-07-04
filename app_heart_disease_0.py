@@ -72,7 +72,7 @@ def user_input_features():
         col1_thalach, col2_thalach = st.columns([0.8, 0.2])
 
         with col1_thalach:
-            thalach = st.slider("Maximum HR (thalach)", 71, 202, 80)
+            thalach = st.slider("Maximum HR (thalach)", 71, 202, 80, key = 'thalach_slider')
 
         with col2_thalach:
             st.write("")
