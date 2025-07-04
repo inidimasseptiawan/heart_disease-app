@@ -34,7 +34,6 @@ def user_input_features():
         options=cp_options_numeric,
         format_func=format_cp_display,
         index=1)
-    cp = st.sidebar.selectbox('Chest Pain (cp)',( 1, 2, 3,4)) 
     
     thalach = st.sidebar.slider("Maximum HR (thalach)", 71, 202, 80)
     slope = st.sidebar.slider("Slope Segment ST on EKG (slope)", 0, 2, 1)
@@ -46,7 +45,7 @@ def user_input_features():
     sex_option = st.sidebar.selectbox("Sex", ('Female', 'Male'))
     sex = 0 if sex_option == "Female" else 1 
     
-    age = st.sidebar.slider("Age", 24, 77, 24)
+    age = st.sidebar.slider("Age", 29, 77, 29)
     
     data = {'cp': cp,
             'thalach': thalach,
