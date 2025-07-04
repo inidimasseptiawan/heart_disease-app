@@ -133,7 +133,7 @@ def heart():
     img = Image.open("heart-disease.jpg")
     st.image(img, width=500)
     
-if st.sidebar.button('Predict!'):
+    if st.sidebar.button('Predict!'):
     df = input_df
     st.write(df)
     with open("generate_heart_disease.pkl", 'rb') as file: 
@@ -159,5 +159,6 @@ if st.sidebar.button('Predict!'):
                 f"<h2 style='color: red;'>POSITIF HEART DISEASE</h2>"
                 f"<h4 style='color: gray;'>Model Confidence (CVD): {score:.2f}</h4>",
                 unsafe_allow_html=True)
+
 # Panggil fungsi heart untuk menjalankan aplikasi
 heart()
