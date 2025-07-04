@@ -19,7 +19,7 @@ st.write("""
 def user_input_features():
     st.sidebar.header('Manual Input')
 
-    # Inisialisasi session_state untuk expander Chest Pain (cp)
+    # --- UI untuk Chest Pain (cp) ---
     if 'show_cp_info' not in st.session_state:
         st.session_state.show_cp_info = False
 
@@ -64,10 +64,29 @@ def user_input_features():
                **1 - Typical Angina:** Chest pain that is characteristic, usually associated with physical activity and relieved by rest or nitroglycerin. \n
                **2 - Atypical Angina:** Chest pain that is less characteristic, perhaps not fully meeting the criteria for typical angina. \n
                **3 - Non-Anginal Pain:** Chest pain that does not originate from heart problems, such as muscle pain or digestive issues. \n
-               **4 - Asymptomatic:** No chest pain reported. \n
-                """)
+               **4 - Asymptomatic:** No chest pain reported. \n """)
     
-    thalach = st.sidebar.slider("Maximum HR (thalach)", 71, 202, 80)
+     # --- UI untuk Maximum HR (thalach) ---
+    with st.sidebar:
+        col1_thalach, col2_thalach = st.columns([0.8, 0.2])
+
+        with col1_thalach:
+            thalach = st.slider("Maximum HR (thalach)", 71, 202, 80, key='thalach_slider')
+
+        with col2_thalach:
+            st.write("")
+            st.write("")
+            if st.button('?', key='thalach_info_button'):
+                st.session_state.show_thalach_info = not st.session_state.show_thalach_info
+
+        if st.session_state.show_thalach_info:
+            with st.expander("Detail Maximum HR (Thalach)", expanded=True):
+                st.write("""
+                **Maximum Heart Rate Achieved (Thalach):** This is the highest heart rate recorded during a stress test. A higher maximum heart rate during exercise generally indicates better cardiovascular fitness. However, in the context of heart disease prediction, the value is assessed alongside other factors. Normal maximum heart rates vary by age and individual fitness levels.
+                """)
+
+
+    
     slope = st.sidebar.slider("Slope Segment ST on EKG (slope)", 0, 2, 1)
     oldpeak = st.sidebar.slider("Depression Segment ST when Peak Activity (peak)", 0.0, 6.2, 1.0)
     exang = st.sidebar.slider("Exercise-Induced Angina (exang)", 0, 1, 1)
