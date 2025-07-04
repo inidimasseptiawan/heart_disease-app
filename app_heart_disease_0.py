@@ -66,8 +66,8 @@ def user_input_features():
                **3 - Non-Anginal Pain:** Chest pain that does not originate from heart problems, such as muscle pain or digestive issues. \n
                **4 - Asymptomatic:** No chest pain reported. \n """)
     
-     # --- UI untuk Maximum HR (thalach) ---
-    with st.sidebar: # Pastikan ini berada di sidebar
+    # UI untuk Maximum HR (thalach) - Perhatikan bahwa inisialisasi session_state sudah dipindahkan
+    with st.sidebar:
         col1_thalach, col2_thalach = st.columns([0.8, 0.2])
 
         with col1_thalach:
