@@ -61,7 +61,7 @@ def heart():
     
     Data obtained from the [Heart Disease dataset](https://archive.ics.uci.edu/dataset/45/heart+disease) by UCIML. 
     """)
-    st.sidebar.header('User Input Features:')
+    st.sidebar.header('List Data Input by Document:')
     # Collects user input features into dataframe
     uploaded_file = st.sidebar.file_uploader("Upload your data here (CSV)", type=["csv"])
     if uploaded_file is not None:
