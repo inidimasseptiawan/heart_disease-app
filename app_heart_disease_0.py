@@ -61,10 +61,10 @@ def user_input_features():
         if st.session_state.show_cp_info:
             with st.expander("Detail Chest Pain (CP)", expanded=True):
                 st.write("""
-               **1 - Typical Angina:** Chest pain that is characteristic, usually associated with physical activity and relieved by rest or nitroglycerin.
-               **2 - Atypical Angina:** Chest pain that is less characteristic, perhaps not fully meeting the criteria for typical angina.
-               **3 - Non-Anginal Pain:** Chest pain that does not originate from heart problems, such as muscle pain or digestive issues.
-               **4 - Asymptomatic:** No chest pain reported.
+               **1 - Typical Angina:** Chest pain that is characteristic, usually associated with physical activity and relieved by rest or nitroglycerin. \n
+               **2 - Atypical Angina:** Chest pain that is less characteristic, perhaps not fully meeting the criteria for typical angina. \n
+               **3 - Non-Anginal Pain:** Chest pain that does not originate from heart problems, such as muscle pain or digestive issues. \n
+               **4 - Asymptomatic:** No chest pain reported. \n
                 """)
     
     thalach = st.sidebar.slider("Maximum HR (thalach)", 71, 202, 80)
