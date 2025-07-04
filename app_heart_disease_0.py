@@ -29,7 +29,7 @@ def user_input_features():
         wcp_text = "Chest pain type unstable and severe (Non-Anginal Pain)"
     elif cp == 4:
         wcp_text = "Chest pain type non heart disease (Asymptomatic)"
-    st.sidebar.write("The type of chest pain felt by the patient:", wcp_text)
+    st.sidebar.write("Felt by the patient:", wcp_text)
     
     thalach = st.sidebar.slider("Maximum HR Achived", 71, 202, 80)
     slope = st.sidebar.slider("Slope Segment ST on Elektrokardiogram (EKG)", 0, 2, 1)
