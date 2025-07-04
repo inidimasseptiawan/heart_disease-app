@@ -18,7 +18,7 @@ st.write("""
 # --- Definisi fungsi user_input_features() ---
 def user_input_features():
     st.sidebar.header('Manual Input')
-    cp = st.sidebar.slider('Chest Pain (cp)', 1, 4, 2) 
+    cp = st.sidebar.selectbox('Chest Pain (cp)', 1, 4, 2) 
     
     wcp_text = ""
     if cp == 1:
@@ -41,7 +41,7 @@ def user_input_features():
     sex_option = st.sidebar.selectbox("Sex", ('Female', 'Male'))
     sex = 0 if sex_option == "Female" else 1 
     
-    age = st.sidebar.slider("Age", 29, 77, 30)
+    age = st.sidebar.slider("Age", 24, 77, 24)
     
     data = {'cp': cp,
             'thalach': thalach,
