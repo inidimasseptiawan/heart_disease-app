@@ -133,30 +133,34 @@ def heart():
     st.image(img, width=500)
 
     if st.sidebar.button('Predict!'):
-        # Tambahkan fitur thalach_ratio
+        # ✅ Tambahkan fitur tambahan fisiologis
         input_df['pred_hr_max'] = 220 - input_df['age']
         input_df['thalach_ratio'] = input_df['thalach'] / input_df['pred_hr_max']
 
-        # Load model, scaler, dan urutan fitur
-        with open("generate_heart_disease.pkl", 'rb') as file: 
+        # ✅ Load urutan fitur yang benar saat training
+        with open("features.pkl", "rb") as f:
+            expected_cols = pickle.load(f)
+
+        # ✅ Susun dataframe sesuai urutan yang benar
+        df = input_df[expected_cols]
+        st.write("### Final Input ke Model:")
+        st.write(df)
+
+        # ✅ Load model
+        with open("generate_heart_disease.pkl", 'rb') as file:
             loaded_model = pickle.load(file)
 
+        # ✅ Load scaler
         with open("scaler.pkl", "rb") as file:
             scaler = pickle.load(file)
 
-        with open("features.pkl", "rb") as file:
-            feature_order = pickle.load(file)
-
-        # Susun ulang dataframe sesuai urutan fitur saat training
-        df = input_df[feature_order]
-        st.write(df)
-
-        # Transformasi dan prediksi
+        # ✅ Transformasi dan prediksi
         input_scaled = scaler.transform(df)
         prediction_proba = loaded_model.predict_proba(input_scaled)
         score = prediction_proba[0][1]
         prediction = loaded_model.predict(input_scaled)
 
+        # ✅ Tampilkan hasil prediksi
         st.subheader('Prediction:')
         with st.spinner('Wait for it...'):
             time.sleep(2)
@@ -170,5 +174,6 @@ def heart():
                     f"<h2 style='color: red;'>POSITIF HEART DISEASE</h2>"
                     f"<h4 style='color: gray;'>Model Confidence (CVD): {score:.2f}</h4>",
                     unsafe_allow_html=True)
+                
 # Panggil fungsi heart untuk menjalankan aplikasi
 heart()
